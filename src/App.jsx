@@ -21,23 +21,18 @@ export const App = () => {
 
   return (
     <main className="section container">
-      {selectedGood === '' && (
-        <h1 className="title is-flex is-align-items-center">
-          No goods selected
-        </h1>
-      )}
+      <h1 className="title is-flex is-align-items-center">
+        {selectedGood ? `${selectedGood} is selected` : 'No goods selected'}
 
-      {selectedGood !== '' && (
-        <h1 className="title is-flex is-align-items-center">
-          {selectedGood} is selected
+        {selectedGood && (
           <button
             data-cy="ClearButton"
             type="button"
             onClick={() => setSelectedGood('')}
             className="delete ml-3"
           />
-        </h1>
-      )}
+        )}
+      </h1>
 
       <table className="table">
         <tbody>
@@ -56,10 +51,8 @@ export const App = () => {
                   className={cn('button', {
                     'is-info': good === selectedGood,
                   })}
-                  onClick={
-                    good === selectedGood
-                      ? () => setSelectedGood('')
-                      : () => setSelectedGood(good)
+                  onClick={() =>
+                    setSelectedGood(good === selectedGood ? '' : good)
                   }
                 >
                   {good === selectedGood ? '-' : '+'}
